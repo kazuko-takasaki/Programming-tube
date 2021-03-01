@@ -1,4 +1,7 @@
 const initialState = {
+    channel: {
+        list: []
+    },
     users: {
         isSignedIn: false,
         role: "",

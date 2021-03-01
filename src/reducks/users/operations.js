@@ -86,7 +86,7 @@ export const signIn = (email, password) => {
                     })
             }
         })
-    }ï
+    }
     
 }
 
