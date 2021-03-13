@@ -2,7 +2,7 @@ import {auth, db, FirebaseTimestamp} from '../../firebase/index';
 import {signInAction, signOutAction} from './action'
 import {push} from 'connected-react-router';
 
-//認証リッスン
+//認証のリッスン
 export const listenAuthState = () => {
     return async (dispatch) => {
         return auth.onAuthStateChanged(user => {
@@ -11,7 +11,7 @@ export const listenAuthState = () => {
 
                 db.collection('users').doc(uid).get()
                 .then(snapshot => {
-                    const data = snapshot.data()
+                    const data = snapshot.data();
 
                     dispatch(signInAction ({
                         isSignedIn: true,

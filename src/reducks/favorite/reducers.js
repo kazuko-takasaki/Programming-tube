@@ -1,18 +1,18 @@
 import * as Actions from './actions';
 import initialState from '../store/initialState'
 
-export const ChannelReducer = (state = initialState.channel, action) => {
+export const FavoriteReducer = (state = initialState.favorites, action) => {
     switch (action.type) {
-        case Actions.FETCH_CHANNELS:
-            return {
-                ...state,
-                list: [...action.payload]
-            };
-        case Actions.DELETE_CHANNELS:
+        case Actions.DELETE_FAVORITES:
                 return {
                     ...state,
                     list: [...action.payload]
                 };
+        case Actions.FETCH_FAVORITES:
+            return {
+                ...state,
+                list: [...action.payload]
+            };
         default:
             return state
     }

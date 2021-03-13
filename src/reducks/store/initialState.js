@@ -1,4 +1,7 @@
 const initialState = {
+    favorites: {
+        list: []
+    },
     channel: {
         list: []
     },

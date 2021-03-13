@@ -2,24 +2,25 @@ import {useCallback, useState, useEffect} from 'react';
 import TextInput from '../components/UI/TextInput';
 import SelectBox from '../components/UI/SelectBox';
 import PrimaryButton from '../components/UI/PrimaryButton';
-import {editChannel} from '../reducks/channel/operations';
-import { useDispatch} from 'react-redux';
+import {saveChannel} from '../reducks/channel/operations';
+import { useDispatch, useSelector } from 'react-redux';
 import ImageArea from '../components/channel/ImageArea';
 import { db } from '../firebase';
 
 const ChannelEdit = () => {
     const dispatch = useDispatch();
+    const selector = useSelector( (state) => state);
 
-    let id = window.location.pathname.split('/channel/edit/')[1];
+    const uid = selector.users.uid
+    const id = ''
     
-    const [title, setTitle] = useState(''),
-            [description, setDescription] = useState(''),
-            [category, setCategory] = useState(''),
+    const [title, setTitle] = useState(""),
+            [description, setDescription] = useState(""),
+            [category, setCategory] = useState(""),
             [categories,setCategories] = useState([]),
-            [url, setUrl] = useState(''),
-            [thumbnail,setThumbnail] = useState(''),
-            [images, setImages] = useState(''),
-            [uid,setUid] = useState('')
+            [url, setUrl] = useState(""),
+            [thumbnail,setThumbnail] = useState(""),
+            [images, setImages] = useState("")
 
     //チャンネル名
     const inputTitle = useCallback( (e) => {
@@ -41,21 +42,6 @@ const ChannelEdit = () => {
         setThumbnail(e.target.value)
     },[setThumbnail])
 
-    useEffect( () => {
-        if(id !== '') {
-            db.collection('channels').doc(id).get()
-            .then(snapshot => {
-                const data = snapshot.data();
-                setTitle(data.title);
-                setDescription(data.description);
-                setCategory(data.category);
-                setUrl(data.url);
-                setThumbnail(data.thumbnail);
-                setImages(data.images);;
-                setUid(data.uid)
-            })
-        }
-    },[id]);
 
     useEffect( () => {
         db.collection('categories').orderBy('order', 'asc').get()
@@ -108,7 +94,7 @@ const ChannelEdit = () => {
                 <div className='center'>
                     <PrimaryButton 
                         label={'登録'}
-                        onClick={() => dispatch(editChannel(id,uid,title,description,url,thumbnail,category,images))}
+                        onClick={() => dispatch(saveChannel(id,uid,title,description,url,thumbnail,category,images))}
                     />
                 </div>
             </div>

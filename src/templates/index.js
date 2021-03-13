@@ -1,4 +1,6 @@
-export {default as Home} from './Home'
 export {default as ChannelEdit} from './ChannelEdit'
+export {default as ChannelList} from './ChannelList'
+export {default as ChannelAdd} from './ChannelAdd'
+export {default as ChannelDetail} from './ChannelDetail'
 export {default as SignUp} from './SignUp'
 export {default as SignIn} from './SignIn'
