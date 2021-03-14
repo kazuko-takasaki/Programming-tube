@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -11,8 +10,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useDispatch} from "react-redux";
 import {push} from 'connected-react-router';
 import {signOut} from '../../reducks/users/operations'
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
-
 
 const useStyle = makeStyles((theme) => ({
     drawer: {
