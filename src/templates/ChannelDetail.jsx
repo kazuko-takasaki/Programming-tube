@@ -58,9 +58,9 @@ const ChannelDetail = () => {
                             <a href={`https://www.youtube.com/watch?v=${channel.thumbnail}`}>
                                 <img src={`https://img.youtube.com/vi/${channel.thumbnail}/mqdefault.jpg`} alt='thumbnail'></img>
                             </a>
-                            <p　className='u-text_p'>◆タイトル</p>
+                            <p　className='u-text_p'>タイトル:</p>
                                 <CategoryButton label={channel.title} />
-                            <p className='u-text_p'>◆カテゴリー</p>
+                            <p className='u-text_p'>カテゴリー:</p>
                                 <CategoryButton label={channel.category} />
                     </div>
                                 

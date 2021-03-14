@@ -8,10 +8,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {useState} from 'react'
-import {deleteChannel} from '../../reducks/channel/operations'
-import {favoriteAdd} from '../../reducks/favorite/operations'
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
+import {useEffect, useState} from 'react';
+import {deleteChannel} from '../../reducks/channel/operations';
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import {favoriteAdd,deleteFavorites} from '../../reducks/users/operations';
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import { db } from '../../firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,9 +40,9 @@ const ChannelCard = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);
 
-
     const uid = selector.users.uid;
     const upUserId = props.uid;
+    const channel_Id = props.id;
 
     console.log(uid)
     console.log(upUserId)
@@ -54,6 +56,31 @@ const ChannelCard = (props) => {
     const handleClose = () => {
         setAnchorEl(null)
     };
+
+    const [saved, setSaved] = useState(false);
+
+    useEffect(() => {
+        console.log('fetch')
+        db.collection('users').doc(uid).collection('favorite').get()
+            .then(snapshots => {
+                snapshots.docs.forEach(doc => {
+                    const data = doc.data();
+
+                    const post_id = data.channelId
+                    if(channel_Id === post_id) {
+                        setSaved(true)
+                    }
+                })
+            })
+    },[saved])
+
+    const handleClickFav = (e) => {
+        if (saved === false) {
+            setSaved(true);
+        } else {
+            setSaved(false);
+        }
+        };
 
     return (
         <Card className={classes.root}>
@@ -96,9 +123,17 @@ const ChannelCard = (props) => {
                             </Menu>
                         </div>
                     )}
-                    <IconButton onClick={() => dispatch(favoriteAdd(props.id,props.title,uid))}>
-                        <FavoriteBorderIcon />
-                    </IconButton>
+                    <div>
+                        { saved === true ?
+                        <IconButton onClick={(e) => dispatch(deleteFavorites(props.id,uid),handleClickFav(e))}>
+                            <FavoriteIcon />
+                        </IconButton>
+                        :
+                        <IconButton onClick={(e) => dispatch(favoriteAdd(props.id,props.title,uid),handleClickFav(e))}>
+                            <FavoriteBorderIcon />
+                        </IconButton>
+                        }
+                    </div>
                 </div>
 
                 <CardContent className={classes.content}>

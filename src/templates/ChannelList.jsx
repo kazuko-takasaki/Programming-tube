@@ -1,9 +1,9 @@
 import {useDispatch, useSelector} from 'react-redux';
 import ChannelCard from '../components/channel/ChannelCard';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {fetchChannels} from '../reducks/channel/operations';
 import {getChannels} from '../reducks/channel/selectors';
-import {fetchFavorites} from '../reducks/favorite/operations';
+import {fetchFavorites} from '../reducks/users/operations';
 
 const ChannelList = () => {
     const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const ChannelList = () => {
     console.log(selector)
 
     const query = selector.router.location.search;
-
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
 
     useEffect( () => {
@@ -25,6 +24,7 @@ const ChannelList = () => {
     useEffect( () => {
         dispatch(fetchFavorites(uid))
     },[]);
+
 
     return (
         <section className='c-section-wrapin'>
@@ -41,6 +41,7 @@ const ChannelList = () => {
                         />
                     ))
                 )}
+
             </div>
         </section>
     )

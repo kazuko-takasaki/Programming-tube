@@ -1,7 +1,4 @@
 const initialState = {
-    favorites: {
-        list: []
-    },
     channel: {
         list: []
     },
@@ -9,7 +6,10 @@ const initialState = {
         isSignedIn: false,
         role: "",
         uid: "",
-        username: ""
+        username: "",
+        favorites: {
+            list: []
+        }
     }
 };
 

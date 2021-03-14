@@ -49,11 +49,8 @@ const CloseDrawer = (props) => {
     ];
     
     const menus = [
-        {func: selectMenu, label: "チャンネル登録",    icon: <AddCircleIcon/>, id: "add", value: "/channel/edit"},
-        {func: selectMenu, label: "お気に入り",   icon:<FavoriteBorderIcon/> ,id: "history",  value: "/order/history"},
+        {func: selectMenu, label: "PR動画の登録",    icon: <AddCircleIcon/>, id: "add", value: "/channel/add"},
     ];
-
-    useEffect( () => {},[])
 
     return (
         <nav className={classes.drawer}>

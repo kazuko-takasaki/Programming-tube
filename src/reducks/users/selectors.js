@@ -10,3 +10,7 @@ export const getSignedIn = createSelector(
 export const getUserId = createSelector(
     [usersSelector],state => state.uid
 )
+
+export const getFavorite = createSelector(
+    [usersSelector],state => state.favorite
+)

@@ -1,6 +1,8 @@
 import {auth, db, FirebaseTimestamp} from '../../firebase/index';
-import {signInAction, signOutAction} from './action'
+import {signInAction, signOutAction,fetchFavoritesAction} from './action'
 import {push} from 'connected-react-router';
+
+const usersRef = db.collection('users')
 
 //認証のリッスン
 export const listenAuthState = () => {
@@ -9,7 +11,7 @@ export const listenAuthState = () => {
             if (user) {
                 const uid = user.uid
 
-                db.collection('users').doc(uid).get()
+                usersRef.doc(uid).get()
                 .then(snapshot => {
                     const data = snapshot.data();
 
@@ -53,7 +55,7 @@ export const signUp = (username,email,password,checkPassword) => {
                         username: username
                     }
 
-                    db.collection('users').doc(uid).set(userInitialData)
+                    usersRef.doc(uid).set(userInitialData)
                         .then(() =>{
                             dispatch(push('/'))
                         })
@@ -72,7 +74,7 @@ export const signIn = (email, password) => {
             if (user) { 
                 const uid = user.uid
 
-                db.collection('users').doc(uid).get()
+                usersRef.doc(uid).get()
                     .then(snapshot => {
                         const data = snapshot.data()
 
@@ -100,3 +102,37 @@ export const signOut = () => {
             })
     }
 }
+
+export const favoriteAdd = (id,title,uid) => {
+    return async () => {
+        
+        const data = {
+            channelId: id,
+            title: title,
+            uid: uid
+        }
+        return usersRef.doc(uid).collection('favorite').doc(id)
+            .set(data)
+    }
+};
+
+export const fetchFavorites = (uid) => {
+    return async (dispatch) => {
+        usersRef.doc(uid).collection('favorite').get()
+                .then(snapshots => {
+                    const favoritesList = []
+                    snapshots.forEach(snapshot => {
+                        const favorite = snapshot.data();
+                        favoritesList.push(favorite)
+                        console.log(favorite)
+                    })
+            dispatch(fetchFavoritesAction(favoritesList))
+        })
+    }
+};
+
+export const deleteFavorites = (id,uid) => {
+    return async () => {
+        usersRef.doc(uid).collection('favorite').doc(id).delete()
+    }
+};
