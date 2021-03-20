@@ -3,14 +3,18 @@ import TextInput from '../components/UI/TextInput';
 import SelectBox from '../components/UI/SelectBox';
 import PrimaryButton from '../components/UI/PrimaryButton';
 import {editChannel} from '../reducks/channel/operations';
-import { useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ImageArea from '../components/channel/ImageArea';
-import { db } from '../firebase';
+import {db} from '../firebase';
 
 const ChannelEdit = () => {
     const dispatch = useDispatch();
 
+    //URLのパス名からchannelIDのみ
     let id = window.location.pathname.split('/channel/edit/')[1];
+
+    const selector = useSelector( (state) => state);
+    const uid = selector.users.uid;
     
     const [title, setTitle] = useState(''),
             [description, setDescription] = useState(''),
@@ -18,8 +22,7 @@ const ChannelEdit = () => {
             [categories,setCategories] = useState([]),
             [url, setUrl] = useState(''),
             [thumbnail,setThumbnail] = useState(''),
-            [images, setImages] = useState(''),
-            [uid,setUid] = useState('')
+            [images, setImages] = useState('')
 
     //チャンネル名
     const inputTitle = useCallback( (e) => {
@@ -41,6 +44,7 @@ const ChannelEdit = () => {
         setThumbnail(e.target.value)
     },[setThumbnail])
 
+    //channelIDから編集前の情報を取得
     useEffect( () => {
         if(id !== '') {
             db.collection('channels').doc(id).get()
@@ -52,11 +56,11 @@ const ChannelEdit = () => {
                 setUrl(data.url);
                 setThumbnail(data.thumbnail);
                 setImages(data.images);;
-                setUid(data.uid)
             })
         }
     },[id]);
 
+    //選択できるカテゴリーの取得
     useEffect( () => {
         db.collection('categories').orderBy('order', 'asc').get()
             .then(snapshots => {
@@ -80,12 +84,10 @@ const ChannelEdit = () => {
                     fullWidth={true} label={'1.PRする動画のタイトル'} multiline={true} required={true}
                     onChange={inputTitle} rows={2} value={title} type={'text'}
                 />
-
                 <TextInput 
                     fullWidth={true} label={'2.紹介文'} multiline={true} required={true}
                     onChange={inputDescription} rows={5} value={description} type={'text'}
                 />
-
                 <TextInput 
                     fullWidth={true} label={'3.PR動画のURL'} multiline={true} required={true}
                     onChange={inputUrl} rows={2} value={url} type={'text'}
@@ -99,7 +101,6 @@ const ChannelEdit = () => {
                 <p className='u-text_p'>※動画のサムネイルを表示します。</p>
                 <p className='u-text_p'>URLのv=以降のIDを入力ください。※https://www.youtube.com/watch?v=(この部分)</p>
                 <div className="module-spacer--medium" />
-
                 <SelectBox
                     label={"カテゴリー"} options={categories} required={true} select={setCategory} value={category}
                 />

@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react'
+import {useState,useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {db} from '../firebase/index';
 import {makeStyles} from '@material-ui/styles';
@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-
 const ChannelDetail = () => {
     const selector = useSelector((state) => state);
     const path = selector.router.location.pathname;
@@ -39,8 +38,11 @@ const ChannelDetail = () => {
     const dispatch = useDispatch();
 
     const id = path.split('/channel/')[1];
+    console.log(id)
+    console.log(typeof id)
     const [channel,setChannel] = useState(null);
 
+    //channelIDで指定したチャンネル情報取得
     useEffect( () => {
         db.collection('channels').doc(id).get()
             .then (snapshot => {
@@ -48,7 +50,6 @@ const ChannelDetail = () => {
                 setChannel(data)
         })
     },[id]);
-
 
     return(
         <section className='c-section-wrapin'>
@@ -62,21 +63,21 @@ const ChannelDetail = () => {
                                 <CategoryButton label={channel.title} />
                             <p className='u-text_p'>カテゴリー:</p>
                                 <CategoryButton label={channel.category} />
-                    </div>
-                                
+                    </div>          
                     <div className={classes.detail}>
                         <p>{channel.description}</p>
-                            <div className='center'>
-                                <div className="module-spacer--medium" />
+                        <div className='center'>
+                            <div className="module-spacer--medium" />
                                 <PrimaryButton
                                     label={'チャンネル一覧に戻る'}
                                     onClick={ () => dispatch(push('/'))}
                                 />
-                            </div>        
+                        </div>        
                     </div>
             </div>
             )}
         </section>
     )
 }
+
 export default ChannelDetail

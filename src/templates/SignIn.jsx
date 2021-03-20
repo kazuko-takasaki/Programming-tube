@@ -1,6 +1,6 @@
 import TextInput from '../components/UI/TextInput';
 import PrimaryButton from '../components/UI/PrimaryButton';
-import {useState,useCallback} from 'react'
+import {useState,useCallback} from 'react';
 import {signIn} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
@@ -9,7 +9,6 @@ import titleLogo from '../assets/images/tubelogo.png';
 
 const SignIn = () => {
     const dispatch = useDispatch();
-
     const [email, setEmail] = useState(""),
             [password, setPassword] = useState("")
 
@@ -35,7 +34,6 @@ const SignIn = () => {
             <div className="c-section-container">
                 <div className="module-spacer--small" />
                 <h2 className="u-text_headline u-text-center">ログイン</h2>
-
                 <TextInput
                     fullWidth={true} label={'メールアドレス'} multiLine={false} required={true}
                     rows={1} value={email} type={'email'} onChange={inputEmail}
@@ -58,10 +56,9 @@ const SignIn = () => {
                         onClick={ () => dispatch(push('/signup'))}
                     />
                 </div>
-
             </div>
         </>
     )
-}
+};
 
 export default SignIn

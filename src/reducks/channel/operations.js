@@ -21,6 +21,7 @@ export const fetchChannels = (category) => {
     return async (dispatch) => {
         let query = channelRef.orderBy('updated_at','desc');
             query = (category !== '') ? query.where('category', '==', category) : query
+            console.log(query);
 
             query.get()
                 .then(snapshots => {

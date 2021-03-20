@@ -11,6 +11,6 @@ export const getUserId = createSelector(
     [usersSelector],state => state.uid
 )
 
-export const getFavorite = createSelector(
-    [usersSelector],state => state.favorite
+export const getUserFavorites = createSelector(
+    [usersSelector],state => state.favorites.list
 )

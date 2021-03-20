@@ -39,6 +39,14 @@ export const signUp = (username,email,password,checkPassword) => {
             alert('必須項目が未入力です')
             return false
         }
+        if (password !== checkPassword) {
+            alert('パスワードが一致しません。もう1度お試しください。')
+            return false
+        }
+        if (password.length < 6) {
+            alert('パスワードは6文字以上で入力してください。')
+            return false
+        }
         return auth.createUserWithEmailAndPassword(email, password)
             .then(result => {
                 const user = result.user
@@ -103,15 +111,16 @@ export const signOut = () => {
     }
 }
 
-export const favoriteAdd = (id,title,uid) => {
+export const favoriteAdd = (channelId,channelTitle,uid) => {
     return async () => {
         
         const data = {
-            channelId: id,
-            title: title,
+            channelId: channelId,
+            title: channelTitle,
             uid: uid
         }
-        return usersRef.doc(uid).collection('favorite').doc(id)
+        console.log(data)
+        return usersRef.doc(uid).collection('favorite').doc(channelId)
             .set(data)
     }
 };

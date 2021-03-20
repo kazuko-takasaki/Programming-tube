@@ -33,7 +33,8 @@ export const signOutAction = () => {
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
 export const fetchFavoritesAction = (favorites) => {
     return {
-        type:'FETCH_FAVORITES',
+        type: "FETCH_FAVORITES",
         payload: favorites
     }
 };
+

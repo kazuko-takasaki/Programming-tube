@@ -1,6 +1,6 @@
 import TextInput from '../components/UI/TextInput';
 import PrimaryButton from '../components/UI/PrimaryButton';
-import {useState,useCallback} from 'react'
+import {useState,useCallback} from 'react';
 import {signUp} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
@@ -8,15 +8,15 @@ import {push} from 'connected-react-router';
 const SignUp = () => {
     const dispatch = useDispatch();
 
-    const [username, setUesrname] = useState(""),
+    const [username, setUsername] = useState(""),
             [email, setEmail] = useState(""),
             [password, setPassword] = useState(""),
             [checkPassword, setCheckPassword] = useState("");
 
     //ユーザー名
     const inputUsername = useCallback ( (e) => {
-        setUesrname(e.target.value)
-    }, [setUesrname]);
+        setUsername(e.target.value)
+    }, [setUsername]);
 
     //メールアドレス
     const inputEmail = useCallback ( (e) => {

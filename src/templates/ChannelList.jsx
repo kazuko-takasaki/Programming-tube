@@ -10,22 +10,27 @@ const ChannelList = () => {
     const selector = useSelector( (state) => state);
     const channels = getChannels(selector);
 
-    const uid = selector.users.uid
-
     console.log(selector)
 
+    console.log(channels)
+
+    //ログイン中のユーザーID
+    const uid = selector.users.uid;
+
+    //URLのクエリパラメータ
     const query = selector.router.location.search;
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
 
+    //dbのチャンネル情報取得
     useEffect( () => {
         dispatch(fetchChannels(category))
-    },[query]);
+    },[query,category,dispatch]);
 
+    //dbのお気に入り情報取得
     useEffect( () => {
         dispatch(fetchFavorites(uid))
-    },[]);
-
-
+    },[uid,dispatch]);
+    
     return (
         <section className='c-section-wrapin'>
             <div className='p-grid_row'>
@@ -41,7 +46,6 @@ const ChannelList = () => {
                         />
                     ))
                 )}
-
             </div>
         </section>
     )

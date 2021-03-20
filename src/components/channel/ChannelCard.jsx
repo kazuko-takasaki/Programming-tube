@@ -13,7 +13,7 @@ import {deleteChannel} from '../../reducks/channel/operations';
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import {favoriteAdd,deleteFavorites} from '../../reducks/users/operations';
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { db } from '../../firebase';
+import {db} from '../../firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
     content: {
         display: 'flex',
         justifyContent: 'space-between',
-    },
-    icon: {
-
     }
 }))
 
@@ -40,12 +37,11 @@ const ChannelCard = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);
 
+    console.log(props)
+
     const uid = selector.users.uid;
     const upUserId = props.uid;
     const channel_Id = props.id;
-
-    console.log(uid)
-    console.log(upUserId)
 
     const [anchorEl,setAnchorEl] = useState(null);
 
@@ -72,7 +68,7 @@ const ChannelCard = (props) => {
                     }
                 })
             })
-    },[saved])
+    },[channel_Id,uid])
 
     const handleClickFav = (e) => {
         if (saved === false) {

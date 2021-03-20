@@ -4,12 +4,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {makeStyles} from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useDispatch} from "react-redux";
 import {push} from 'connected-react-router';
 import {signOut} from '../../reducks/users/operations'
+import {TransitionsModal} from './index'
 
 const useStyle = makeStyles((theme) => ({
     drawer: {
@@ -29,11 +29,9 @@ const CloseDrawer = (props) => {
     const {container} = props;
     const dispatch = useDispatch();
 
-    console.log(props);
-
     const selectMenu = (e, path) => {
         dispatch(push(path));
-        props.onClose(e,false);
+        props.onClose(e);
     };
 
     const filters = [
@@ -45,10 +43,6 @@ const CloseDrawer = (props) => {
         {func: selectMenu, label: 'Typescript', id: "p5", value: '/?category=Typescript'},
     ];
     
-    const menus = [
-        {func: selectMenu, label: "PR動画の登録",    icon: <AddCircleIcon/>, id: "add", value: "/channel/add"},
-    ];
-
     return (
         <nav className={classes.drawer}>
             <Drawer
@@ -61,23 +55,17 @@ const CloseDrawer = (props) => {
                 ModalProps={{keepMounted: true}}
             >
                 <div>
-                    <List>
-                        {menus.map(menu => (
-                                    <ListItem button key={menu.id} onClick={(e) => menu.func(e, menu.value)}>
-                                        <ListItemIcon>
-                                            {menu.icon}
-                                        </ListItemIcon>
-                                        <ListItemText primary={menu.label} />
-                                    </ListItem>
-                            ))}
-                        <ListItem button key='logout' onClick={() => dispatch(signOut())}>
+                    <List component="nav">
+                            <TransitionsModal />
+                        <ListItem button onClick={(e) => dispatch(signOut(),selectMenu(e))}>
                             <ListItemIcon>
                                 <ExitToAppIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'ログアウト'}></ListItemText>
+                            <ListItemText primary='ログアウト'></ListItemText>
                         </ListItem>
                     </List>
-                    <Divider />
+                <Divider />
+                    <List component="nav">
                         {filters.map(filter => (
                             <ListItem
                                 button
@@ -87,13 +75,11 @@ const CloseDrawer = (props) => {
                                 <ListItemText primary={filter.label}></ListItemText>
                             </ListItem>
                         ))}
+                    </List>
                 </div>
-
             </Drawer>
-
         </nav>
     )
-
 };
 
 export default CloseDrawer

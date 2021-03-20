@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import ImageArea from '../components/channel/ImageArea';
 import { db } from '../firebase';
 
-const ChannelEdit = () => {
+const ChannelAdd = () => {
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);
 
-    const uid = selector.users.uid
+    //ログイン中のユーザーID
+    const uid = selector.users.uid;
+
     const id = ''
     
     const [title, setTitle] = useState(""),
@@ -102,4 +104,4 @@ const ChannelEdit = () => {
         )
 }
 
-export default ChannelEdit
+export default ChannelAdd
