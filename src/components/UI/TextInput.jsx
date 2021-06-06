@@ -14,5 +14,5 @@ const TextInput = (props) => {
             onChange={props.onChange}
         />
     )
-}
-export default TextInput
+};
+export default TextInput;

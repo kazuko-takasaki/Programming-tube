@@ -10,11 +10,10 @@ const useStyles = makeStyles( {
         marginButton: 16,
         width: 256
     }
-})
+});
 
 const PrimaryButton = (props) => {
     const classes = useStyles();
-
     return (
         <Button className={classes.button} variant="contained" onClick={()=> props.onClick()}>
             {props.label}
@@ -22,7 +21,7 @@ const PrimaryButton = (props) => {
     )
 };
 
-export default PrimaryButton
+export default PrimaryButton;
 
 
 

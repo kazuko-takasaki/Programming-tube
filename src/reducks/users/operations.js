@@ -1,5 +1,5 @@
 import {auth, db, FirebaseTimestamp} from '../../firebase/index';
-import {signInAction, signOutAction,fetchFavoritesAction} from './action'
+import {signInAction, signOutAction,fetchFavoritesAction} from './action';
 import {push} from 'connected-react-router';
 
 const usersRef = db.collection('users')
@@ -10,11 +10,9 @@ export const listenAuthState = () => {
         return auth.onAuthStateChanged(user => {
             if (user) {
                 const uid = user.uid
-
                 usersRef.doc(uid).get()
                 .then(snapshot => {
                     const data = snapshot.data();
-
                     dispatch(signInAction ({
                         isSignedIn: true,
                         role: data.role,
@@ -28,14 +26,13 @@ export const listenAuthState = () => {
             }
         })
     }
-    
-}
+};
 
 //新規登録
 export const signUp = (username,email,password,checkPassword) => {
     return async (dispatch) => {
         //バリテーション
-        if(username === "" || email === "") {
+        if(username === "" || email === "" || password === '' || checkPassword === '') {
             alert('必須項目が未入力です')
             return false
         }
@@ -50,11 +47,9 @@ export const signUp = (username,email,password,checkPassword) => {
         return auth.createUserWithEmailAndPassword(email, password)
             .then(result => {
                 const user = result.user
-
                 if(user) {
                     const uid = user.uid
                     const timestamp =FirebaseTimestamp.now()
-
                     const userInitialData = {
                         created_at: timestamp,
                         email: email,
@@ -62,7 +57,6 @@ export const signUp = (username,email,password,checkPassword) => {
                         uid: uid,
                         username: username
                     }
-
                     usersRef.doc(uid).set(userInitialData)
                         .then(() =>{
                             dispatch(push('/'))
@@ -75,17 +69,14 @@ export const signUp = (username,email,password,checkPassword) => {
 //ログイン
 export const signIn = (email, password) => {
     return async (dispatch) => {
-
     auth.signInWithEmailAndPassword(email,password)
         .then (result => {
             const user = result.user
             if (user) { 
                 const uid = user.uid
-
                 usersRef.doc(uid).get()
                     .then(snapshot => {
                         const data = snapshot.data()
-
                         dispatch(signInAction({
                             isSignedIn: true,
                             role: data.role,
@@ -97,8 +88,7 @@ export const signIn = (email, password) => {
             }
         })
     }
-    
-}
+};
 
 //ログアウト
 export const signOut = () => {
@@ -111,6 +101,7 @@ export const signOut = () => {
     }
 }
 
+//いいね追加
 export const favoriteAdd = (channelId,channelTitle,uid) => {
     return async () => {
         
@@ -125,6 +116,7 @@ export const favoriteAdd = (channelId,channelTitle,uid) => {
     }
 };
 
+//いいねチャンネル取得
 export const fetchFavorites = (uid) => {
     return async (dispatch) => {
         usersRef.doc(uid).collection('favorite').get()
@@ -133,13 +125,13 @@ export const fetchFavorites = (uid) => {
                     snapshots.forEach(snapshot => {
                         const favorite = snapshot.data();
                         favoritesList.push(favorite)
-                        console.log(favorite)
                     })
             dispatch(fetchFavoritesAction(favoritesList))
         })
     }
 };
 
+//いいね解除
 export const deleteFavorites = (id,uid) => {
     return async () => {
         usersRef.doc(uid).collection('favorite').doc(id).delete()

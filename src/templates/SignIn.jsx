@@ -9,7 +9,7 @@ import titleLogo from '../assets/images/tubelogo.png';
 
 const SignIn = () => {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState(""),
+    const   [email, setEmail] = useState(""),
             [password, setPassword] = useState("")
 
     //メールアドレス
@@ -30,7 +30,6 @@ const SignIn = () => {
                 <p>MyプログラミングチャンネルをPRする</p>
                 <p>学べるプログラミングチャンネルを探す</p>
             </div>
-
             <div className="c-section-container">
                 <div className="module-spacer--small" />
                 <h2 className="u-text_headline u-text-center">ログイン</h2>
@@ -42,6 +41,11 @@ const SignIn = () => {
                     fullWidth={true} label={'パスワード'} multiLine={false} required={true}
                     rows={1} value={password} type={'password'} onChange={inputPassword}
                 />
+                <div className="module-spacer--medium" />
+                    <div>
+                        <p>メールアドレス：test001@gmail.com</p>
+                        <p>パスワード：test001でログインできます。</p>
+                    </div>
                 <div className="module-spacer--medium" />
                 <div className='center'>
                     <PrimaryButton

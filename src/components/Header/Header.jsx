@@ -42,8 +42,6 @@ const Header = () => {
         setOpen(!open)
     },[setOpen, open])
 
-    console.log(isSignedIn);
-
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className={classes.menuBar}>

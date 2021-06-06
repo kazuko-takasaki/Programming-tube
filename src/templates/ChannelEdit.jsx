@@ -16,7 +16,7 @@ const ChannelEdit = () => {
     const selector = useSelector( (state) => state);
     const uid = selector.users.uid;
     
-    const [title, setTitle] = useState(''),
+    const 　[title, setTitle] = useState(''),
             [description, setDescription] = useState(''),
             [category, setCategory] = useState(''),
             [categories,setCategories] = useState([]),
@@ -44,7 +44,7 @@ const ChannelEdit = () => {
         setThumbnail(e.target.value)
     },[setThumbnail])
 
-    //channelIDから編集前の情報を取得
+    //channelIDから現在の登録情報を取得
     useEffect( () => {
         if(id !== '') {
             db.collection('channels').doc(id).get()
@@ -115,6 +115,6 @@ const ChannelEdit = () => {
             </div>
         </section>
         )
-}
+};
 
 export default ChannelEdit

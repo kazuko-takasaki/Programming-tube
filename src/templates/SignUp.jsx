@@ -1,14 +1,14 @@
-import TextInput from '../components/UI/TextInput';
-import PrimaryButton from '../components/UI/PrimaryButton';
 import {useState,useCallback} from 'react';
 import {signUp} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
+import TextInput from '../components/UI/TextInput';
+import PrimaryButton from '../components/UI/PrimaryButton';
 
 const SignUp = () => {
     const dispatch = useDispatch();
 
-    const [username, setUsername] = useState(""),
+    const   [username, setUsername] = useState(""),
             [email, setEmail] = useState(""),
             [password, setPassword] = useState(""),
             [checkPassword, setCheckPassword] = useState("");

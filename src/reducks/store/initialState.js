@@ -4,9 +4,9 @@ const initialState = {
     },
     users: {
         isSignedIn: false,
-        role: "",
-        uid: "",
-        username: "",
+        role: '',
+        uid: '',
+        username: '',
         favorites: {
             list: []
         }

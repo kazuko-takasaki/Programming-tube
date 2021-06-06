@@ -2,19 +2,16 @@ import {useState,useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {db} from '../firebase/index';
 import {makeStyles} from '@material-ui/styles';
-import CategoryButton from '../components/UI/CategoryButton';
 import PrimaryButton from '../components/UI/PrimaryButton';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
+import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
+import CategoryIcon from '@material-ui/icons/Category';
+import StyleIcon from '@material-ui/icons/Style';
 
 const useStyles = makeStyles((theme) => ({
     images: {
-        [theme.breakpoints.down('sm')]: {
-            margin : '0 auto 24px auto'
-        },
-        [theme.breakpoints.up('sm')]: {
-            margin: '0 auto'
-        },
+            margin : '0 auto'
     },
     detail: {
         textAlign: 'left',
@@ -29,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
             width: 500
         },
     }
-}))
+}));
 
 const ChannelDetail = () => {
     const selector = useSelector((state) => state);
@@ -38,8 +35,6 @@ const ChannelDetail = () => {
     const dispatch = useDispatch();
 
     const id = path.split('/channel/')[1];
-    console.log(id)
-    console.log(typeof id)
     const [channel,setChannel] = useState(null);
 
     //channelIDで指定したチャンネル情報取得
@@ -59,11 +54,17 @@ const ChannelDetail = () => {
                             <a href={`https://www.youtube.com/watch?v=${channel.thumbnail}`}>
                                 <img src={`https://img.youtube.com/vi/${channel.thumbnail}/mqdefault.jpg`} alt='thumbnail'></img>
                             </a>
-                            <p　className='u-text_p'>タイトル:</p>
-                                <CategoryButton label={channel.title} />
-                            <p className='u-text_p'>カテゴリー:</p>
-                                <CategoryButton label={channel.category} />
+                            <div　className='u-text-left '>
+                                <p><StyleIcon />タイトル</p>
+                            </div>
+                                <p className='p-text'>{channel.title}</p>
+                            <div className='u-text-left'>
+                                <p><CategoryIcon />カテゴリー</p>
+                            </div>
+                                <p className='p-text'>{channel.category}</p>
+                                <p className='p-text'>画像をクリックするとYoutubeが再生されます<OndemandVideoIcon /></p>
                     </div>          
+                
                     <div className={classes.detail}>
                         <p>{channel.description}</p>
                         <div className='center'>
@@ -78,6 +79,6 @@ const ChannelDetail = () => {
             )}
         </section>
     )
-}
+};
 
 export default ChannelDetail

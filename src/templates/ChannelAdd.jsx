@@ -5,7 +5,7 @@ import PrimaryButton from '../components/UI/PrimaryButton';
 import {saveChannel} from '../reducks/channel/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageArea from '../components/channel/ImageArea';
-import { db } from '../firebase';
+import {db} from '../firebase';
 
 const ChannelAdd = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const ChannelAdd = () => {
 
     const id = ''
     
-    const [title, setTitle] = useState(""),
+    const   [title, setTitle] = useState(""),
             [description, setDescription] = useState(""),
             [category, setCategory] = useState(""),
             [categories,setCategories] = useState([]),
@@ -37,6 +37,13 @@ const ChannelAdd = () => {
     //URL
     const inputUrl = useCallback( (e) => {
         setUrl(e.target.value)
+        //URLのID箇所のみ抽出
+        const channelUrl = e.target.value
+        if (/^https?:\/{2,}.*?(\/.*)/.test(channelUrl) ){
+            const urlId = channelUrl.match(/^https?:\/{2,}.*?(\/.*)/)[1];
+            const thumbnailId = urlId.split('watch?v=')[1]
+            setThumbnail(thumbnailId)
+        }
     },[setUrl])
 
     //URLのID
@@ -68,12 +75,10 @@ const ChannelAdd = () => {
                     fullWidth={true} label={'1.PRする動画のタイトル'} multiline={true} required={true}
                     onChange={inputTitle} rows={2} value={title} type={'text'}
                 />
-
                 <TextInput 
                     fullWidth={true} label={'2.紹介文'} multiline={true} required={true}
                     onChange={inputDescription} rows={5} value={description} type={'text'}
                 />
-
                 <TextInput 
                     fullWidth={true} label={'3.PR動画のURL'} multiline={true} required={true}
                     onChange={inputUrl} rows={2} value={url} type={'text'}
@@ -84,10 +89,9 @@ const ChannelAdd = () => {
                     fullWidth={true} label={'4.PR動画のサムネイル'} multiline={true} required={true}
                     onChange={inputThumbnail} rows={2} value={thumbnail} type={'text'}
                 />
-                <p className='u-text_p'>※動画のサムネイルを表示します。</p>
-                <p className='u-text_p'>URLのv=以降のIDを入力ください。※https://www.youtube.com/watch?v=(この部分)</p>
+                <p className='u-text_p'>※IDから動画のサムネイルを表示します。</p>
+                <p className='u-text_p'>※3.にチャンネル名のURLを入力することで自動で入力されます。https://www.youtube.com/watch?v=(この部分)</p>
                 <div className="module-spacer--medium" />
-
                 <SelectBox
                     label={"カテゴリー"} options={categories} required={true} select={setCategory} value={category}
                 />
@@ -102,6 +106,6 @@ const ChannelAdd = () => {
             </div>
         </section>
         )
-}
+};
 
 export default ChannelAdd

@@ -18,30 +18,22 @@ const ImageArea = ({images,setImages}) => {
 
     const uploadImage = useCallback((event) => {
         const file = event.target.files;
-
-        console.log(file)
         
         let blob = new Blob(file, { type: "image/jpeg" });
-
-        console.log(blob);
 
         // Generate random 16 digits strings
         const S="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         const N=16;
         const fileName = Array.from(crypto.getRandomValues(new Uint32Array(N))).map((n)=>S[n%S.length]).join('')
 
-        console.log(fileName);
-
         const uploadRef = storage.ref('images').child(fileName);
         const uploadTask = uploadRef.put(blob);
-
 
         uploadTask.then(() => {
             // Handle successful uploads on complete
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 const newImage = {id: fileName, path: downloadURL};
                 ({images,setImages}).setImages([newImage])
-            
             });
         });
     },[images,setImages])
@@ -62,6 +54,7 @@ const deleteImage = useCallback( async(id) => {
             <div className='u-text-right'>
                 <span>チャンネルのアイコン登録</span>
                 <IconButton className={classes.icon}>
+                <div className="module-spacer--medium" />
                     <label>
                         <AddPhotoAlternateIcon />
                         <input className='u-display-none' 

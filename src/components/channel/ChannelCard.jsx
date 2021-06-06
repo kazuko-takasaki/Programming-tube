@@ -14,6 +14,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import {favoriteAdd,deleteFavorites} from '../../reducks/users/operations';
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import {db} from '../../firebase';
+import {getUserId} from '../../reducks/users/selectors'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,14 +37,13 @@ const ChannelCard = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);
+    const uid = getUserId(selector);
 
-    console.log(props)
-
-    const uid = selector.users.uid;
     const upUserId = props.uid;
     const channel_Id = props.id;
 
     const [anchorEl,setAnchorEl] = useState(null);
+    const [saved, setSaved] = useState(false);
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget)
@@ -53,10 +53,7 @@ const ChannelCard = (props) => {
         setAnchorEl(null)
     };
 
-    const [saved, setSaved] = useState(false);
-
     useEffect(() => {
-        console.log('fetch')
         db.collection('users').doc(uid).collection('favorite').get()
             .then(snapshots => {
                 snapshots.docs.forEach(doc => {
@@ -110,7 +107,8 @@ const ChannelCard = (props) => {
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => {
-                                        dispatch(deleteChannel(props.id));
+                                        const result = window.confirm('削除してもよろしいですか？')
+                                        if (result) dispatch(deleteChannel(props.id));
                                         handleClose()
                                     }}
                                 >

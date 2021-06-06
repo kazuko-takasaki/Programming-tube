@@ -2,20 +2,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import ChannelCard from '../components/channel/ChannelCard';
 import {useEffect} from 'react';
 import {fetchChannels} from '../reducks/channel/operations';
-import {getChannels} from '../reducks/channel/selectors';
+import {getChannels} from '../reducks/channel/selectors'
+import {getUserId} from '../reducks/users/selectors'
 import {fetchFavorites} from '../reducks/users/operations';
 
 const ChannelList = () => {
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);
     const channels = getChannels(selector);
-
-    console.log(selector)
-
-    console.log(channels)
-
-    //ログイン中のユーザーID
-    const uid = selector.users.uid;
+    const uid = getUserId(selector);
 
     //URLのクエリパラメータ
     const query = selector.router.location.search;

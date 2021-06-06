@@ -10,18 +10,17 @@ import {MuiThemeProvider} from '@material-ui/core';
 import {theme} from './assets/theme';
 
 const history = History.createBrowserHistory();
-
 export const store = createStore(history);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <MuiThemeProvider theme={theme}>
-        <App />
-      </MuiThemeProvider>
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <MuiThemeProvider theme={theme}>
+                <App />
+            </MuiThemeProvider>
+        </ConnectedRouter>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

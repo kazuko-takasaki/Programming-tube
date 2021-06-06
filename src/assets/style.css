@@ -31,12 +31,6 @@
     background-color: black;
 }
 
-.cover__title {
-    font-size: 36px;
-    letter-spacing: 5px;
-    font-family: Alegreya Sans SC;
-}
-
 .c-section-container {
     margin: 0 auto;
     max-width: 550px;
@@ -82,69 +76,32 @@
     text-align: center;
 }
 
-/*********** Footer ***********/
-.l-footer {
-    display: flex;
-    flex-flow: row wrap;
-    list-style: none;
-    margin: 0 1rem;
-}
-
-.l-footer > a {
-    color: #444;
-    font-size: .9rem;
-    margin-right: 1rem;
-}
-
-.u-text-small {
-    font-size: .9rem;
-}
-
-.u-text__link-none {
-    text-decoration: none;
-}
-
-.u-text-left {
-    text-align: left;
-}
-
-.u-text-right {
-    text-align: right;
-}
-
 .u-text-center {
     text-align: center;
+    font-weight: bold;
+    color: #21466b;
+}
+
+.u-text-left p {
+    text-align: left;
+    margin-top: 1rem;
+    color: #21466b;
+}
+
+.p-text {
+    margin-bottom: 1rem;
 }
 
 .u-text_headline {
-    color: #3b4949;
-    font-size: 1.563rem;
-    margin: 0 auto 1rem auto;
-}
-
-.u-text_p {
-    color: #404a53;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
 }
 
 .u-display-none {
     display: none;
 }
 
-.detail_title {
-    color: #444;
-    text-align: center;
-
-}
-
 @media screen and (min-width: 576px) {
     /*********** Module Spacer ***********/
-    .module-spacer--extra-extra-small {
-        height: 16px
-    }
-    .module-spacer--extra-small {
-        height: 20px
-    }
     .module-spacer--small {
         height: 32px
     }

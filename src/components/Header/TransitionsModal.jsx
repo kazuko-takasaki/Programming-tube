@@ -36,8 +36,6 @@ const TransitionsModal = ( ) => {
   const [open, setOpen] = React.useState(false);
 
   const uid = String(selector.users.uid);
-
-  console.log(favoriteChannels)
   
   const handleOpen = () => {
     setOpen(true);
