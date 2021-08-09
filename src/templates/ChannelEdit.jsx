@@ -50,11 +50,6 @@ const ChannelEdit = () => {
             }
     },[setUrl])
 
-    //URLのID
-    const inputThumbnail = useCallback( (e) => {
-        setThumbnail(e.target.value)
-    },[setThumbnail])
-
     //channelIDから現在の登録情報を取得
     useEffect( () => {
         if(id !== undefined) {
@@ -105,15 +100,8 @@ const ChannelEdit = () => {
                 />
                 <p className='u-text_p'>※PRしたい動画のURLを入力ください。</p>
                 <div className="module-spacer--medium" />
-                <TextInput
-                    fullWidth={true} label={'4.PR動画のサムネイル'} multiline={true} required={true}
-                    onChange={inputThumbnail} rows={2} value={thumbnail} type={'text'}
-                />
-                <p className='u-text_p'>※動画のサムネイルを表示します。</p>
-                <p className='u-text_p'>URLのv=以降のIDを入力ください。※https://www.youtube.com/watch?v=(この部分)</p>
-                <div className="module-spacer--medium" />
                 <SelectBox
-                    label={"カテゴリー"} options={categories} required={true} select={setCategory} value={category}
+                    label={"4.カテゴリー"} options={categories} required={true} select={setCategory} value={category}
                 />
                 <ImageArea images={images} setImages={setImages} />
                 <div className="module-spacer--medium" />

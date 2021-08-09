@@ -35,7 +35,7 @@ const CloseDrawer = (props) => {
         {func: selectMenu, label: 'Javascript', id: "p2", value: '/?category=Javascript'},
         {func: selectMenu, label: 'Ruby', id: "p3", value: '/?category=Ruby'},
         {func: selectMenu, label: 'PHP', id: "p4", value: '/?category=PHP'},
-        {func: selectMenu, label: 'C#', id: "p5", value: '/?category=C#'},
+        {func: selectMenu, label: 'Kotlin', id: "p5", value: '/?category=Kotlin'},
         {func: selectMenu, label: 'React', id: "p6", value: '/?category=React'},
         {func: selectMenu, label: 'Python', id: "p7", value: '/?category=Python'},
         {func: selectMenu, label: 'others', id: "p8", value: '/?category=others'},
