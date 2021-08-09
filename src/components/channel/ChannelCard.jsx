@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ChannelCard = (props) => {
-    console.log(props)
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);

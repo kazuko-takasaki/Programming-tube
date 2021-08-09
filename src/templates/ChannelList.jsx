@@ -13,6 +13,8 @@ const ChannelList = () => {
     const query = selector.router.location.search;
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
 
+    console.log(category)
+
     //dbのチャンネル情報取得
     useEffect( () => {
         dispatch(fetchChannels(category))
