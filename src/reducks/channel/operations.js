@@ -37,6 +37,10 @@ export const fetchChannels = (category) => {
 export const saveChannel = (id,uid,title,description,url,thumbnail,category,images) => {   
     
     return async (dispatch) => {
+        if(title ==='' || description === '' || url === '' || category === '' || images === '') {
+            alert('全ての項目に入力をお願いします')
+            return false
+        }
         const timestamp = FirebaseTimestamp.now()
 
         const data = {
@@ -57,7 +61,7 @@ export const saveChannel = (id,uid,title,description,url,thumbnail,category,imag
             data.created_at = timestamp
         }
 
-        return channelRef.doc(id).set(data)
+        return  channelRef.doc(id).set(data)
             .then(() => {
                 dispatch(push('/'))
             })
@@ -72,6 +76,7 @@ export const editChannel = (id,uid,title,description,url,thumbnail,category,imag
 
         const data = {
             title: title,
+            id:id,
             description: description,
             category: category,
             url: url,
@@ -81,7 +86,7 @@ export const editChannel = (id,uid,title,description,url,thumbnail,category,imag
             uid: uid
         }
 
-        return channelRef.doc(id).set(data, {marge: true})
+        return channelRef.doc(id).set(data, {merge: true})
             .then(() => {
                 dispatch(push('/'))
             })

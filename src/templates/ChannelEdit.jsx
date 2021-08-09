@@ -9,14 +9,18 @@ import {db} from '../firebase';
 
 const ChannelEdit = () => {
     const dispatch = useDispatch();
-
-    //URLのパス名からchannelIDのみ
-    let id = window.location.pathname.split('/channel/edit/')[1];
-
     const selector = useSelector( (state) => state);
     const uid = selector.users.uid;
+
+    //URLのパス名からchannelIDのみ
+    let id = window.location.pathname.split('/channel/edit')[1];
+    console.log(id)
+
+    if (id !==　undefined) {
+        id = id.split('/')[1]
+    }
     
-    const 　[title, setTitle] = useState(''),
+    const [title, setTitle] = useState(''),
             [description, setDescription] = useState(''),
             [category, setCategory] = useState(''),
             [categories,setCategories] = useState([]),
@@ -36,7 +40,14 @@ const ChannelEdit = () => {
 
     //URL
     const inputUrl = useCallback( (e) => {
-        setUrl(e.target.value)
+            setUrl(e.target.value)
+            //URLのID箇所のみ抽出
+            const channelUrl = e.target.value
+            if (/^https?:\/{2,}.*?(\/.*)/.test(channelUrl) ){
+                const urlId = channelUrl.match(/^https?:\/{2,}.*?(\/.*)/)[1];
+                const thumbnailId = urlId.split('watch?v=')[1]
+                setThumbnail(thumbnailId)
+            }
     },[setUrl])
 
     //URLのID
@@ -46,10 +57,10 @@ const ChannelEdit = () => {
 
     //channelIDから現在の登録情報を取得
     useEffect( () => {
-        if(id !== '') {
+        if(id !== undefined) {
             db.collection('channels').doc(id).get()
             .then(snapshot => {
-                const data = snapshot.data();
+                const data = snapshot.data()
                 setTitle(data.title);
                 setDescription(data.description);
                 setCategory(data.category);
@@ -74,7 +85,7 @@ const ChannelEdit = () => {
                 })
                 setCategories(list)
             })
-    },[]);
+    },[category,dispatch]);
 
     return(
         <section>

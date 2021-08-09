@@ -4,7 +4,7 @@ import {useState,useCallback} from 'react';
 import {signIn} from '../reducks/users/operations';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
-import titleLogo from '../assets/images/tubelogo.png';
+import titleLogo from '../assets/images/logo.png';
 
 
 const SignIn = () => {
@@ -25,13 +25,13 @@ const SignIn = () => {
     return(
         <>
             <div className="cover">
-                <img src={titleLogo} alt='logo' width='300px'/>
-                <div className="module-spacer--small" />
-                <p>MyプログラミングチャンネルをPRする</p>
+                <img src={titleLogo} alt='logo' width='200px'/>
+                <div className="module-spacer--medium" />
+                <p>自分のプログラミングチャンネルをPRする</p>
                 <p>学べるプログラミングチャンネルを探す</p>
             </div>
             <div className="c-section-container">
-                <div className="module-spacer--small" />
+                <div className="module-spacer--medium" />
                 <h2 className="u-text_headline u-text-center">ログイン</h2>
                 <TextInput
                     fullWidth={true} label={'メールアドレス'} multiLine={false} required={true}

@@ -18,7 +18,6 @@ const ImageArea = ({images,setImages}) => {
 
     const uploadImage = useCallback((event) => {
         const file = event.target.files;
-        
         let blob = new Blob(file, { type: "image/jpeg" });
 
         // Generate random 16 digits strings
@@ -52,7 +51,8 @@ const deleteImage = useCallback( async(id) => {
     return (
         <div>
             <div className='u-text-right'>
-                <span>チャンネルのアイコン登録</span>
+                <div className="module-spacer--medium" />
+                <span>5.チャンネルのアイコン登録</span>
                 <IconButton className={classes.icon}>
                 <div className="module-spacer--medium" />
                     <label>

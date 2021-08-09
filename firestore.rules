@@ -7,7 +7,6 @@ service cloud.firestore {
       allow update: if request.auth.uid == userId;
       allow delete: if request.auth.uid == userId;
     }
-
     match /channels/{channelId} {
       allow read: if request.auth.uid != null;
       allow write: if request.auth.uid != null;
@@ -15,12 +14,6 @@ service cloud.firestore {
     match /categories/{categoryId} {
       allow read: if request.auth.uid != null;
       allow write: if request.auth.uid != null;
-    }
-    match /users/{userId}/favorite/{channelId}  {
-      allow read: if request.auth.uid != null;
-      allow create;
-      allow update: if request.auth.uid == userId;
-      allow delete: if request.auth.uid == userId;
     }
   }
 }

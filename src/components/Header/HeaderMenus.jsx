@@ -13,7 +13,6 @@ const HeaderMenus = (props) => {
                 <AddCircleIcon />
                 <h2>PR動画の登録</h2>
             </IconButton>
-
             <IconButton onClick={(e) => props.open(e)}>
                 <MenuIcon />
             </IconButton>

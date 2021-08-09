@@ -1,4 +1,3 @@
 export {default as Header} from './Header';
 export {default as HeaderMenus} from './HeaderMenus';
 export {default as CloseDrawer} from './CloseDrawer';
-export {default as TransitionsModal} from './TransitionsModal';

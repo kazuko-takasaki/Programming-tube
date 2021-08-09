@@ -3,14 +3,11 @@ import ChannelCard from '../components/channel/ChannelCard';
 import {useEffect} from 'react';
 import {fetchChannels} from '../reducks/channel/operations';
 import {getChannels} from '../reducks/channel/selectors'
-import {getUserId} from '../reducks/users/selectors'
-import {fetchFavorites} from '../reducks/users/operations';
 
 const ChannelList = () => {
     const dispatch = useDispatch();
     const selector = useSelector( (state) => state);
     const channels = getChannels(selector);
-    const uid = getUserId(selector);
 
     //URLのクエリパラメータ
     const query = selector.router.location.search;
@@ -19,13 +16,8 @@ const ChannelList = () => {
     //dbのチャンネル情報取得
     useEffect( () => {
         dispatch(fetchChannels(category))
-    },[query,category,dispatch]);
+    },[category,dispatch]);
 
-    //dbのお気に入り情報取得
-    useEffect( () => {
-        dispatch(fetchFavorites(uid))
-    },[uid,dispatch]);
-    
     return (
         <section className='c-section-wrapin'>
             <div className='p-grid_row'>

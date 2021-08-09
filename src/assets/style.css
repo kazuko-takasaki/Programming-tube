@@ -1,7 +1,4 @@
 /*********** Module Spacer ***********/
-.module-spacer--small {
-    height: 20px
-}
 .module-spacer--medium {
     height: 32px
 }
@@ -18,9 +15,9 @@
 }
 
 .cover {
-    color: white;
+    color: rgb(29, 29, 31);
+    background-image: url('../assets/images/haikei.jpg');
     height: 200px;
-    background-image: url("./images/black_00007.png");
     background-size:cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -28,7 +25,6 @@
     justify-content: center;
     align-items: center;
     flex-flow: column nowrap;
-    background-color: black;
 }
 
 .c-section-container {
@@ -82,14 +78,16 @@
     color: #21466b;
 }
 
-.u-text-left p {
-    text-align: left;
-    margin-top: 1rem;
-    color: #21466b;
-}
-
 .p-text {
     margin-bottom: 1rem;
+}
+
+.p-title {
+        padding: 0.4em 0.5em;
+        color: #494949;
+        background: #f4f4f4;
+        border-left: solid 5px #99c8db;
+        border-bottom: solid 3px #d7d7d7;
 }
 
 .u-text_headline {
@@ -101,20 +99,9 @@
 }
 
 @media screen and (min-width: 576px) {
-    /*********** Module Spacer ***********/
-    .module-spacer--small {
-        height: 32px
-    }
 
     /*********** Section ***********/
     .c-section-wrapin {
         max-width: 1024px;
-    }
-}
-
-@media screen and (min-width:1024px) {
-    /*********** Module Spacer ***********/
-    .module-spacer--medium {
-        height: 48px
     }
 }

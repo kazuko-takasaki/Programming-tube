@@ -10,7 +10,3 @@ export const getSignedIn = createSelector(
 export const getUserId = createSelector(
     [usersSelector],state => state.uid
 )
-
-export const getUserFavorites = createSelector(
-    [usersSelector],state => state.favorites.list
-)

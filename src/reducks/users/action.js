@@ -6,10 +6,7 @@ export const signInAction = (userState) => {
             isSignedIn: true,
             role: userState.role,
             uid: userState.uid,
-            username: userState.username,
-                favorites: {
-                    list: []
-                }
+            username: userState.username
         }
     }
 };
@@ -22,19 +19,8 @@ export const signOutAction = () => {
             isSignedIn: false,
             role: "",
             uid: "",
-            username: "",
-            favorites: {
-                list: []
-            }
+            username: ""
         }
-    }
-};
-
-export const FETCH_FAVORITES = 'FETCH_FAVORITES';
-export const fetchFavoritesAction = (favorites) => {
-    return {
-        type: "FETCH_FAVORITES",
-        payload: favorites
     }
 };
 

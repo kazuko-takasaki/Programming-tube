@@ -1,5 +1,5 @@
 import {auth, db, FirebaseTimestamp} from '../../firebase/index';
-import {signInAction, signOutAction,fetchFavoritesAction} from './action';
+import {signInAction, signOutAction} from './action';
 import {push} from 'connected-react-router';
 
 const usersRef = db.collection('users')
@@ -100,40 +100,3 @@ export const signOut = () => {
             })
     }
 }
-
-//いいね追加
-export const favoriteAdd = (channelId,channelTitle,uid) => {
-    return async () => {
-        
-        const data = {
-            channelId: channelId,
-            title: channelTitle,
-            uid: uid
-        }
-        console.log(data)
-        return usersRef.doc(uid).collection('favorite').doc(channelId)
-            .set(data)
-    }
-};
-
-//いいねチャンネル取得
-export const fetchFavorites = (uid) => {
-    return async (dispatch) => {
-        usersRef.doc(uid).collection('favorite').get()
-                .then(snapshots => {
-                    const favoritesList = []
-                    snapshots.forEach(snapshot => {
-                        const favorite = snapshot.data();
-                        favoritesList.push(favorite)
-                    })
-            dispatch(fetchFavoritesAction(favoritesList))
-        })
-    }
-};
-
-//いいね解除
-export const deleteFavorites = (id,uid) => {
-    return async () => {
-        usersRef.doc(uid).collection('favorite').doc(id).delete()
-    }
-};

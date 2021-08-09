@@ -13,10 +13,9 @@ const ChannelAdd = () => {
 
     //ログイン中のユーザーID
     const uid = selector.users.uid;
-
     const id = ''
     
-    const   [title, setTitle] = useState(""),
+    const  [title, setTitle] = useState(""),
             [description, setDescription] = useState(""),
             [category, setCategory] = useState(""),
             [categories,setCategories] = useState([]),
@@ -36,20 +35,15 @@ const ChannelAdd = () => {
 
     //URL
     const inputUrl = useCallback( (e) => {
-        setUrl(e.target.value)
-        //URLのID箇所のみ抽出
-        const channelUrl = e.target.value
-        if (/^https?:\/{2,}.*?(\/.*)/.test(channelUrl) ){
-            const urlId = channelUrl.match(/^https?:\/{2,}.*?(\/.*)/)[1];
-            const thumbnailId = urlId.split('watch?v=')[1]
-            setThumbnail(thumbnailId)
-        }
+            setUrl(e.target.value)
+            //URLのID箇所のみ抽出(サムネイル)
+            const channelUrl = e.target.value
+            if (/^https?:\/{2,}.*?(\/.*)/.test(channelUrl) ){
+                const urlId = channelUrl.match(/^https?:\/{2,}.*?(\/.*)/)[1];
+                const thumbnailId = urlId.split('watch?v=')[1]
+                setThumbnail(thumbnailId)
+            }
     },[setUrl])
-
-    //URLのID
-    const inputThumbnail = useCallback( (e) => {
-        setThumbnail(e.target.value)
-    },[setThumbnail])
 
 
     useEffect( () => {
@@ -83,17 +77,10 @@ const ChannelAdd = () => {
                     fullWidth={true} label={'3.PR動画のURL'} multiline={true} required={true}
                     onChange={inputUrl} rows={2} value={url} type={'text'}
                 />
-                <p className='u-text_p'>※PRしたい動画のURLを入力ください。</p>
-                <div className="module-spacer--medium" />
-                <TextInput
-                    fullWidth={true} label={'4.PR動画のサムネイル'} multiline={true} required={true}
-                    onChange={inputThumbnail} rows={2} value={thumbnail} type={'text'}
-                />
-                <p className='u-text_p'>※IDから動画のサムネイルを表示します。</p>
-                <p className='u-text_p'>※3.にチャンネル名のURLを入力することで自動で入力されます。https://www.youtube.com/watch?v=(この部分)</p>
+                <p className='u-text_p'>※PRしたい動画のURLを入力してください。</p>
                 <div className="module-spacer--medium" />
                 <SelectBox
-                    label={"カテゴリー"} options={categories} required={true} select={setCategory} value={category}
+                    label={"4.カテゴリー"} options={categories} required={true} select={setCategory} value={category}
                 />
                 <ImageArea images={images} setImages={setImages} />
                 <div className="module-spacer--medium" />

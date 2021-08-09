@@ -9,7 +9,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useDispatch} from "react-redux";
 import {push} from 'connected-react-router';
 import {signOut} from '../../reducks/users/operations'
-import {TransitionsModal} from './index'
 
 const useStyle = makeStyles((theme) => ({
     drawer: {
@@ -17,11 +16,7 @@ const useStyle = makeStyles((theme) => ({
             width: 256,
             flexShrink: 0,
         }
-    },
-    toolbar: theme.mixins.toolbar,
-        drawerPaper: {
-            width: 256,
-    },
+    }
 }));
 
 const CloseDrawer = (props) => {
@@ -40,7 +35,10 @@ const CloseDrawer = (props) => {
         {func: selectMenu, label: 'Javascript', id: "p2", value: '/?category=Javascript'},
         {func: selectMenu, label: 'Ruby', id: "p3", value: '/?category=Ruby'},
         {func: selectMenu, label: 'PHP', id: "p4", value: '/?category=PHP'},
-        {func: selectMenu, label: 'Typescript', id: "p5", value: '/?category=Typescript'},
+        {func: selectMenu, label: 'C#', id: "p5", value: '/?category=C#'},
+        {func: selectMenu, label: 'React', id: "p6", value: '/?category=React'},
+        {func: selectMenu, label: 'Python', id: "p7", value: '/?category=Python'},
+        {func: selectMenu, label: 'others', id: "p8", value: '/?category=others'},
     ];
     
     return (
@@ -56,7 +54,6 @@ const CloseDrawer = (props) => {
             >
                 <div>
                     <List component="nav">
-                            <TransitionsModal />
                         <ListItem button onClick={(e) => dispatch(signOut(),selectMenu(e))}>
                             <ListItemIcon>
                                 <ExitToAppIcon />
