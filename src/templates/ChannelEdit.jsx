@@ -15,7 +15,6 @@ const ChannelEdit = () => {
     //URLのパス名からchannelIDのみ
     let id = window.location.pathname.split('/channel/edit')[1];
     console.log(id)
-
     if (id !==　undefined) {
         id = id.split('/')[1]
     }
