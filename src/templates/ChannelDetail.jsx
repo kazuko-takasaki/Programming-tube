@@ -5,8 +5,6 @@ import {makeStyles} from '@material-ui/core/styles';
 import PrimaryButton from '../components/UI/PrimaryButton';
 import {useDispatch} from 'react-redux';
 import {push} from 'connected-react-router';
-import CategoryIcon from '@material-ui/icons/Category';
-import StyleIcon from '@material-ui/icons/Style';
 
 const useStyles = makeStyles((theme) => ({
     images: {
@@ -56,15 +54,15 @@ const ChannelDetail = () => {
                             </a>
                             <div className="module-spacer--medium" />
                                 <div　className='p-title'>
-                                    <p><StyleIcon />タイトル</p>
+                                    <p>タイトル</p>
                                 </div>
                                 <p className='p-text'>{channel.title}</p>
                                 <div className='p-title'>
-                                    <p><CategoryIcon />カテゴリー</p>
+                                    <p>カテゴリー</p>
                                 </div>
                                 <p className='p-text'>{channel.category}</p>
                                 <p className='p-text'>画像をクリックするとYoutubeが再生されます</p>
-                    </div>          
+                            </div>          
                     <div className={classes.detail}>
                         <div className='center'>
                             <p className='p-title'>PRポイント</p>
@@ -72,8 +70,7 @@ const ChannelDetail = () => {
                                 <div className="module-spacer--medium" />
                                     <PrimaryButton
                                         label={'チャンネル一覧に戻る'}
-                                        onClick={ () => dispatch(push('/'))}
-                                    />
+                                        onClick={ () => dispatch(push('/'))}/>
                         </div>        
                     </div>
             </div>

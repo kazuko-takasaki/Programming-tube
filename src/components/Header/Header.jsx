@@ -8,13 +8,9 @@ import {HeaderMenus,CloseDrawer} from './index';
 import logo from '../../assets/images/logo.png';
 import {push} from 'connected-react-router';
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(() => ({
     root: {
         flexGrow: 1
-    },
-    menuBar: {
-        backgroundColor: '#add8e6',
-        color: '#008b8b'
     },
     toolBar: {
         margin: '0 auto',
@@ -44,7 +40,7 @@ const Header = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position='fixed' className={classes.menuBar}>
+            <AppBar position='fixed' color='default'>
                 <Toolbar className={classes.toolBar}>
                     <img src={logo} alt='logo' width='180px'
                         onClick={() => dispatch(push('/'))}

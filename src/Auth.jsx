@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getSignedIn} from "./reducks/users/selectors";
 import {listenAuthState} from "./reducks/users/operations";
@@ -14,10 +14,10 @@ const Auth = ({children}) => {
         }
     }, [dispatch,isSignedIn]);
 
-    if (!isSignedIn) {
-        return <></>
-    } else {
+    if (isSignedIn) {
         return children
+    } else {
+        return <></>
     }
 };
 
